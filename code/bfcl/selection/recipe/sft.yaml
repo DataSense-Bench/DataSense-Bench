@@ -1,0 +1,16 @@
+# FIXED training recipe (LlamaFactory, official EnvScaler expansion). Read-only reference — do not run.
+# The only thing that changes between the n_groups runs is which 50 trajectories go in.
+model_name_or_path: Qwen/Qwen3-4B
+stage: sft
+finetuning_type: full            # full-parameter
+template: qwen3
+mask_history: true               # one sample per assistant turn; history has <think> removed (see expand.py)
+cutoff_len: 16384                # prompt+target truncated to this many tokens
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 16  # x 2 GPUs -> effective batch 32
+learning_rate: 5.0e-6
+num_train_epochs: 2
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+seed: 42

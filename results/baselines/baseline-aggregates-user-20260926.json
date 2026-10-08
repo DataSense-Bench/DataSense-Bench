@@ -1,0 +1,26 @@
+{
+  "source": "User-provided aggregates from another machine, 2026-09-26; individual raw runs not supplied with these overrides",
+  "std": "reported standard deviation; raw-run recalculation unavailable here",
+  "bfcl": {
+    "unit": "accuracy_percent",
+    "base": {
+      "mean": 31.67
+    },
+    "random": {
+      "mean": 34.75,
+      "std": 1.19
+    }
+  },
+  "tblite": {
+    "unit": "mean_reward",
+    "random": {
+      "mean": 0.1155,
+      "std": 0.01
+    },
+    "base": {
+      "mean": 0.04045222222222222,
+      "n_trials": 300,
+      "source": "Verified Qwen3-4B evaluation on 100 TBLite tasks, three evaluations per task."
+    }
+  }
+}

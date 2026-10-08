@@ -1,0 +1,91 @@
+Read `config.yaml` in the current directory first. It specifies:
+`base_model` (HF id / path), `dataset_path` (the full SFT candidate dataset, parquet),
+`n_groups` (=5), `group_size` (=1000), and `max_len`. Use exactly these — do not
+hardcode other values.
+
+We have that base model and the full SFT candidate dataset. A FIXED training recipe
+(provided as code at `recipe/sft.py`, do not modify or run it) will later fine-tune the
+base model separately on each of `n_groups` data groups, with identical hyper-parameters;
+the only variable across runs is which data subset goes in.
+
+## Downstream benchmark (what the trained models will be scored on)
+Each trained model will act as a TERMINAL AGENT: dropped into a fresh Unix environment
+with a natural-language task (e.g. build/fix code, process data, configure the system),
+it interacts over many turns — issuing shell commands and reading their output — and is
+scored by whether the task's automated tests pass at the end. You never see the benchmark
+tasks; you only know the evaluation is of this kind.
+
+## Your goal
+This is a SELECTION-AND-RANKING task. Predict, for every sample in the dataset, its
+expected value for SFT (how much it would improve the downstream benchmark if trained
+on), and use that prediction to SELECT `n_groups` groups of exactly `group_size` rows
+each, ordered so that: after training each group with the fixed recipe, benchmark score
+goes from high to low as the group index goes from 1 to n_groups (group 1 best,
+group n_groups worst).
+
+You are FREE to design the valuation however you think works best. You may use a SINGLE
+signal or COMBINE MULTIPLE complementary signals (e.g. loss/perplexity, trajectory
+quality, task difficulty, efficiency, diversity/coverage, length effects, …) into a
+composite score — your choice. Don't feel obliged to use just one textbook metric; use
+whatever you believe will best achieve the objective below.
+
+### Objective (what you are optimizing)
+1. **PRIMARY — make group 1 as strong as possible.** Group 1 should be the single most
+   valuable `group_size`-row subset you can assemble from the whole pool: after training
+   on it alone, its benchmark score should be as HIGH as possible — ideally beating a
+   random subset of the same size and approaching what training on the whole pool would
+   give. Put real effort into getting the very top group right; that is the headline result.
+2. **ORDERING — rank the groups.** Score should decrease from group 1 to group
+   n_groups (Spearman between group index and post-trained score → −1). Place the most
+   valuable samples in the lowest-numbered groups and the least valuable of your selection
+   in the highest.
+
+## Deliverable (the ONLY thing you produce)
+Write `outputs/group_assignment.csv` with columns: `index,group_id`
+- `index`  = the row index into the dataset (config.dataset_path) (0-based)
+- `group_id` = an integer in 1..n_groups
+- The file contains ONLY the selected rows: exactly n_groups × group_size lines
+  (plus header), each selected index exactly once, exactly `group_size` rows per
+  group_id. Unselected rows must NOT appear in the file.
+Also write `outputs/method.md` briefly explaining your method and why.
+Do NOT produce a trained model. Do NOT run the training recipe.
+
+## Hard constraints
+1. INFERENCE-ONLY. You may only run forward passes of the base model (hidden states / logits
+   are accessible). NO gradients, NO optimizer steps, NO training of any model (not even a
+   small proxy). Gradient/optimizer calls are disabled in this sandbox and will raise.
+2. The base model (config.base_model) is READ-ONLY. Use it as-is; do not fine-tune or overwrite it.
+3. Do NOT access any benchmark/test set. Only use the dataset at `config.dataset_path`.
+4. The n_groups groups must be mutually disjoint and each contain exactly `group_size`
+   rows. They need NOT cover the dataset: rows outside your selection are left unused.
+5. Work only in the current directory. Internet is available for packages if needed
+   (transformers/datasets/torch/pyarrow are pre-installed).
+
+## Data format
+The dataset at `config.dataset_path` has a `messages` column: a Python list of role/content
+dicts in chat format; each row is one multi-turn terminal-agent trajectory. The recipe
+trains on this `messages` column via the model chat template
+(tokenizer.apply_chat_template), truncating at `max_len`, with the non-assistant parts
+masked so loss is on assistant tokens only. To match it, build inputs with the chat
+template rather than concatenating raw strings.
+
+## Environment
+- A single H100 GPU (80 GB) is available. The dataset (config.dataset_path), the base
+  model (config.base_model), and `recipe/sft.py` (read-only reference) are in the
+  current directory.
+- TIME BUDGET: complete the task within 4 hours. Plan your computation to fit — the
+  deliverable must be written and verified before the budget runs out.
+- You operate fully autonomously; never ask for feedback. Just produce
+  `outputs/group_assignment.csv`.
+
+## Execution model (IMPORTANT — single headless turn)
+You run as ONE non-interactive, single-shot invocation. There is NO async re-invocation:
+the moment you end your turn, the process exits and ANY background work you started is
+KILLED. Therefore:
+- Run every computation SYNCHRONOUSLY in the FOREGROUND and BLOCK until it finishes
+  (e.g. run `python score.py` directly and wait for it to return — do NOT use `nohup ... &`,
+  `&` backgrounding, `disown`, or detached processes).
+- Do NOT use ScheduleWakeup, completion-waiters, sleep-then-yield, or any "I'll resume when
+  notified" pattern — you will NOT be resumed.
+- Long foreground commands are fine within the time budget. Only end your turn AFTER
+  `outputs/group_assignment.csv` is written and verified on disk.

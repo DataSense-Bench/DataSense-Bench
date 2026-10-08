@@ -1,0 +1,126 @@
+Read `config.yaml` in the current directory first. It specifies:
+`base_model` (HF id / path), `dataset_path` (the full SFT candidate dataset, parquet),
+`n_groups` (=5), `group_size` (=50), and `max_len`. Use exactly these — do not
+hardcode other values.
+
+We have that base model and the full SFT candidate dataset. A FIXED training recipe
+(documented in `recipe/README.md`, `recipe/sft.yaml` and `recipe/expand.py`; read them, do not
+modify or run them) will later fine-tune the base model separately on each of `n_groups` data
+groups, with identical hyper-parameters; the only variable across runs is which data subset goes in.
+
+## Downstream benchmark (what the trained models will be scored on)
+Each trained model will act as a TOOL-USE AGENT in a stateful environment: given a set of
+function definitions and a user request, it must decide over several turns which functions to
+call and with what arguments, read the returned results, and continue until the request is
+fulfilled — including cases where a needed function is missing, a required argument was never
+given, or the context is very long. It is scored by whether the environment ends in the correct
+state. You never see the benchmark tasks; you only know the evaluation is of this kind.
+
+## Your goal
+This is a SELECTION-AND-RANKING task. Predict, for every trajectory in the dataset, its
+expected value for SFT (how much it would improve the downstream benchmark if trained
+on), and use that prediction to SELECT `n_groups` groups of exactly `group_size` rows
+each, ordered so that: after training each group with the fixed recipe, benchmark score
+goes from high to low as the group index goes from 1 to n_groups (group 1 best,
+group n_groups worst).
+
+You are FREE to design the valuation however you think works best. You may use a SINGLE
+signal or COMBINE MULTIPLE complementary signals (e.g. loss/perplexity, trajectory
+quality, task difficulty, tool-call correctness, efficiency, diversity/coverage of
+environments and tools, length effects, …) into a composite score — your choice. Don't
+feel obliged to use just one textbook metric; use whatever you believe will best achieve
+the objective below.
+
+### Objective (what you are optimizing)
+1. **PRIMARY — make group 1 as strong as possible.** Group 1 should be the single most
+   valuable `group_size`-row subset you can assemble from the whole pool: after training
+   on it alone, its benchmark score should be as HIGH as possible — ideally beating a
+   random subset of the same size. Put real effort into getting the very top group right;
+   that is the headline result.
+2. **ORDERING — rank the groups.** Score should decrease from group 1 to group
+   n_groups (Spearman between group index and post-trained score → −1). Place the most
+   valuable trajectories in the lowest-numbered groups and the least valuable of your
+   selection in the highest.
+
+## Deliverable (the ONLY thing you produce)
+Write `outputs/group_assignment.csv` with columns: `index,meta_index,group_id`
+- `index`      = the 0-based ROW POSITION of the trajectory in the dataset file
+                 (config.dataset_path): 0 for the first row, n_rows-1 for the last.
+- `meta_index` = the value of the `meta_index` COLUMN of that same row. It is an
+                 identifier, NOT the row position, and differs from `index` for most
+                 rows. Write both: they are checked against each other and the file is
+                 rejected if any pair disagrees, so a mix-up surfaces immediately
+                 instead of silently selecting other trajectories.
+- `group_id`   = an integer in 1..n_groups
+- The file contains ONLY the selected rows: exactly n_groups × group_size lines
+  (plus header), each selected index exactly once, exactly `group_size` rows per
+  group_id. Unselected rows must NOT appear in the file.
+Also write `outputs/method.md` briefly explaining your method and why.
+Do NOT produce a trained model. Do NOT run the training recipe.
+
+### `index` and `meta_index` are DIFFERENT numbers — read this before writing the file
+`index` is WHERE a trajectory sits in the file. `meta_index` is an ID stored INSIDE the row,
+carried over from the corpus this pool was filtered out of. Because some trajectories were
+removed when the pool was built, the two drift apart: they agree for the first rows and then
+differ for about 96% of the file, by up to 60. Concretely, the row at position 379 carries
+`meta_index` 380.
+
+In pandas terms: `index` is the position you would pass to `.iloc[]`; `meta_index` is the
+column `df["meta_index"]`. Reading the column when you need the position (or the reverse)
+selects DIFFERENT trajectories than the ones you scored, and most of those wrong values are
+themselves in range, so nothing would look broken.
+
+For each selected trajectory write the pair exactly as the dataset has it:
+`index` = its row position, `meta_index` = `df["meta_index"].iloc[index]`.
+
+## Hard constraints
+1. INFERENCE-ONLY. You may only run forward passes of the base model (hidden states / logits
+   are accessible). NO gradients, NO optimizer steps, NO training of any model (not even a
+   small proxy). Gradient/optimizer calls are disabled in this sandbox and will raise.
+2. The base model (config.base_model) is READ-ONLY. Use it as-is; do not fine-tune or overwrite it.
+3. Do NOT access any benchmark/test set. Only use the dataset at `config.dataset_path`.
+4. The n_groups groups must be mutually disjoint and each contain exactly `group_size`
+   rows. They need NOT cover the dataset: rows outside your selection are left unused.
+5. Work only in the current directory. Internet is available for packages if needed
+   (transformers/datasets/torch/pyarrow are pre-installed).
+
+## Data format
+Each row of the dataset is ONE multi-turn tool-use trajectory. Columns: `meta_index`
+(an identifier carried over from the source corpus -- NOT the row position),
+`env_id` (the simulated environment the trajectory was collected in), `task_id`, `traj_type`
+("conversation" or "non_conversation"), `steps` (number of assistant turns) and `messages`, a
+list of role/content dicts:
+- `messages[0]` is the system message; it contains the environment instructions AND the
+  function definitions available in that trajectory (Qwen3 `<tools>` format).
+- Then user and assistant messages alternate. A user message is either the user's request
+  or one or more `<tool_response>…</tool_response>` blocks returning what the previously
+  called functions produced.
+- EVERY assistant message starts with its reasoning in `<think>…</think>`, followed by text
+  and/or `<tool_call>{"name": …, "arguments": {…}}</tool_call>` blocks.
+The recipe does NOT train on a row as one sequence: it expands a row with `steps` assistant
+turns into `steps` samples, each supervising one assistant turn (with its `<think>`) given the
+preceding turns with their `<think>` blocks removed — see `recipe/expand.py`, and use it (or
+match it exactly) when you compute anything per sample with the model chat template
+(tokenizer.apply_chat_template), truncating at `max_len`.
+
+## Environment
+- A single H100 GPU (80 GB) is available. The dataset (config.dataset_path), the base
+  model (config.base_model), and `recipe/` (read-only reference) are in the current directory.
+- Scale: about 9k trajectories averaging ~18 turns and ~6.5k tokens each when rendered; a
+  full forward pass over the whole pool is feasible on this GPU but not free — plan it.
+- TIME BUDGET: complete the task within 4 hours. Plan your computation to fit — the
+  deliverable must be written and verified before the budget runs out.
+- You operate fully autonomously; never ask for feedback. Just produce
+  `outputs/group_assignment.csv`.
+
+## Execution model (IMPORTANT — single headless turn)
+You run as ONE non-interactive, single-shot invocation. There is NO async re-invocation:
+the moment you end your turn, the process exits and ANY background work you started is
+KILLED. Therefore:
+- Run every computation SYNCHRONOUSLY in the FOREGROUND and BLOCK until it finishes
+  (e.g. run `python score.py` directly and wait for it to return — do NOT use `nohup ... &`,
+  `&` backgrounding, `disown`, or detached processes).
+- Do NOT use ScheduleWakeup, completion-waiters, sleep-then-yield, or any "I'll resume when
+  notified" pattern — you will NOT be resumed.
+- Long foreground commands are fine within the time budget. Only end your turn AFTER
+  `outputs/group_assignment.csv` is written and verified on disk.

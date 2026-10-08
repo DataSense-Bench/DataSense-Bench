@@ -1,0 +1,7 @@
+# EnvScaler pool (2026-09-19): 8,962 tool-use trajectories rendered from EnvScaler-SFT-Traj-9K metadata
+# (the 60-trajectory validation split excluded). 5 disjoint groups of 50; cutoff 16,384 per recipe/sft.yaml.
+base_model: Qwen/Qwen3-4B
+dataset_path: /data/envscaler/pool.parquet
+n_groups: 5
+group_size: 50
+max_len: 16384

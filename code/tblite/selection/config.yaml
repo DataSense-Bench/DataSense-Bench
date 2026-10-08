@@ -1,0 +1,7 @@
+# OpenThoughts-Agent pool (2026-09-14): the 10K OT-Agent SFT set converted to our `messages` parquet;
+# 5 disjoint groups of 1000; context cutoff 32,768 per the OT recipe (recipe/sft.py).
+base_model: Qwen/Qwen3-4B   # user 2026-09-14: Qwen3-4B (hybrid), NOT Instruct-2507
+dataset_path: /data/openthoughts_agent_10k/train_10k.parquet
+n_groups: 5
+group_size: 1000
+max_len: 32768

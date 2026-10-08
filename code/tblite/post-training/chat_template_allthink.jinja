@@ -1,0 +1,20 @@
+{#- Serving template for Qwen3-4B-family checkpoints trained with tokenizer_genmask_qwen3-4b-allthink
+    (2026-09-15). Plain ChatML; assistant history turns keep their reasoning as <think>...</think>
+    before the content, exactly as rendered at training time. harbor terminus-2 must run with
+    interleaved_thinking=true so reasoning_content is sent back; vLLM's qwen3 reasoning parser
+    still splits the NEW turn into reasoning_content/content. No tools support (terminus-2 uses none). -#}
+{%- for message in messages %}
+    {%- if message.role == "assistant" %}
+        {%- set content = message.content if message.content is string else '' %}
+        {%- if message.reasoning_content is string and message.reasoning_content | trim %}
+            {{- '<|im_start|>assistant\n<think>' + message.reasoning_content | trim + '</think>' + content + '<|im_end|>\n' }}
+        {%- else %}
+            {{- '<|im_start|>assistant\n' + content + '<|im_end|>\n' }}
+        {%- endif %}
+    {%- else %}
+        {{- '<|im_start|>' + message.role + '\n' + (message.content if message.content is string else '') + '<|im_end|>\n' }}
+    {%- endif %}
+{%- endfor %}
+{%- if add_generation_prompt %}
+    {{- '<|im_start|>assistant\n' }}
+{%- endif %}

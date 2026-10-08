@@ -1,0 +1,566 @@
+[
+  {
+    "task": "tblite",
+    "agent": "fable5",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "028a65e192f2dd287cf1d862425545210c793109cc7fde77857e15ed8b94ea22",
+    "log_metadata": {
+      "model": "claude-fable-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/fable5/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "fable5",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "92f41a363561bfd460fa5cad98d8505e63bd1793d0257629443b599a7b1726cc",
+    "log_metadata": {
+      "model": "claude-fable-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/fable5/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "fable5",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "8cfcb3037c103c8a9581c2e3c41cd03783f194b568f32901d73d524cc514557c",
+    "log_metadata": {
+      "model": "claude-fable-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/fable5/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "fable51",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "c64d069b7936c600acac446207ceea67b9645b1b6dddea381e8ec18a7ede6d63",
+    "log_metadata": {
+      "model": "claude-fable-5-1",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/fable51/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "fable51",
+    "run": 2,
+    "source_attempt": 5,
+    "source_assignment_sha256": "70f8b30018d38f38809b77742f16230f334e467125f4bcd78305c8a4265ed0c1",
+    "log_metadata": {
+      "model": "claude-fable-5-1",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/fable51/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "fable51",
+    "run": 3,
+    "source_attempt": 6,
+    "source_assignment_sha256": "77d957d259a5a8d654f271ab3d81759ccf844f0aae9e9d1764429e7b6016eff0",
+    "log_metadata": {
+      "model": "claude-fable-5-1",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/fable51/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "opus5",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "1c14a0514f29e80a04c49114e5a06b2d5b02d23f1d26060a2164e3cd31b15fb1",
+    "log_metadata": {
+      "model": "claude-opus-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/opus5/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "opus5",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "385aade83d83c66e5d5d39aaca6481de443fe5ab8502cbe3dada9833cbef762c",
+    "log_metadata": {
+      "model": "claude-opus-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/opus5/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "opus5",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "5e3fb2ee847dbe63156b32eea2c8df8446053368eed95cb29b6d70a84e47cc4d",
+    "log_metadata": {
+      "model": "claude-opus-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/opus5/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "sonnet5",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "33b77536d27a2af8b2db007d766e20df3ac361a55adf6f184f9a463deab2eb67",
+    "log_metadata": {
+      "model": "claude-sonnet-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/sonnet5/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "sonnet5",
+    "run": 2,
+    "source_attempt": 3,
+    "source_assignment_sha256": "e1ee8d087029ddf25c14f38d5b48fc033c091b29a1e96d089f964a01bd1de69d",
+    "log_metadata": {
+      "model": "claude-sonnet-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/sonnet5/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "sonnet5",
+    "run": 3,
+    "source_attempt": 4,
+    "source_assignment_sha256": "aa3bcb319e84d601f848b3a865c9bd41e469c95e876f88221b0ce1eaa129f203",
+    "log_metadata": {
+      "model": "claude-sonnet-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/sonnet5/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt55",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "0b490d8a661832f49f0876b7deff1bd505d97f1dba68187164d21b7c13898b94",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt55/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt55",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "2a208042e2f8175142198a9de4bbfb56c16385c7e23800a4ec3c6bb7fbe0e9e0",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt55/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt55",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "18f88d9d6cbbd93f6270a6115f08b9ecf86bca46013bdc6eb3b4a99ba318b738",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt55/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt56sol",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "c6ec1577ee503ef7857992379e5447da0184d4904d77eafe5afdafc5311bb3b4",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt56sol/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt56sol",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "8c1d8fb335ad330ae7e90a64150445479f57b4865f70e0115320d31e78818595",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt56sol/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt56sol",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "532c1123bc4d082fbefe3c8217974ad3af67399e2c62b9dcdf202b6d562827eb",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt56sol/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt6astra",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "b731f9dcdba01eaa4ec77ba44d7aaad3dc1aea10956138423030da41047c86e1",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt6astra/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt6astra",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "2a12221fef87adaf4c77ffac759fced739dfcadd881568340db460ebdcced3d4",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt6astra/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gpt6astra",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "0822134bc1cf53a4479b11f4afb7928924df9f8f2f647a5fec21f81ead8f1072",
+    "log_metadata": {},
+    "file": "results/assignments/tblite/gpt6astra/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "deepseekv4pro",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "1ce5b556510c69ab9d0e185485ec7a2c02d42d585f2e58ee1a694539ae850e2a",
+    "log_metadata": {
+      "model": "deepseek-v4-pro",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/deepseekv4pro/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "deepseekv4pro",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "d7feeba5912cbb570dc298cd38af76d14ad08d9507441fa51f7cd6c7d4bf9594",
+    "log_metadata": {
+      "model": "deepseek-v4-pro",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/deepseekv4pro/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "deepseekv4pro",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "db44a1fae5df795a019b486e0d8832ef4a9fe624efede705c9423ebf181c5805",
+    "log_metadata": {
+      "model": "deepseek-v4-pro",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/deepseekv4pro/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "kimik3",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "e9eaaa8cd0e4836fbe258ab71f25abd17dd669fd54b456d9d07aaad7a07eb788",
+    "log_metadata": {
+      "model": "kimi-k3",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/kimik3/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "kimik3",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "a72fc94bfdac9d048e815d4f147e7ef9a173e477e078a024b97828dbb21997af",
+    "log_metadata": {
+      "model": "kimi-k3",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/kimik3/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "kimik3",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "314da9c8a1f92611ea6f9d7034341fd403d8e26c514728cd74ae9feb195940e7",
+    "log_metadata": {
+      "model": "kimi-k3",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/tblite/kimik3/run3.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gemini35flash",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "272aae9642e1ae5a02131b78dfeec7c408a3565b68420a8f7404c23e328ed47c",
+    "log_metadata": {
+      "model": "gemini-3.8-flash"
+    },
+    "file": "results/assignments/tblite/gemini35flash/run1.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gemini35flash",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "22f83494f50f4154b744af5cff977f4a17617311f6bc61f55d99301fe5638e49",
+    "log_metadata": {
+      "model": "gemini-3.8-flash"
+    },
+    "file": "results/assignments/tblite/gemini35flash/run2.csv"
+  },
+  {
+    "task": "tblite",
+    "agent": "gemini35flash",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "ee69339d2d8f1103e76c0642a94fe831a3b894ed1ab0d317a8be4638cb1c223d",
+    "log_metadata": {
+      "model": "gemini-3.8-flash"
+    },
+    "file": "results/assignments/tblite/gemini35flash/run3.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "fable51",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "670fc70b88ae84b3e69f103198c87b71dcca02c7b98281f9b99f15fdfcb070c7",
+    "log_metadata": {
+      "model": "claude-fable-5-1",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/fable51/run1.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "fable51",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "48d926f40585a04c2fca832854c29818101571b2091117f27928b54c7393de90",
+    "log_metadata": {
+      "model": "claude-fable-5-1",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/fable51/run2.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "fable51",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "75a3c6faba5ce99f33231dcd6e909ef646219cb535fc66bba9a99e9ebcf89189",
+    "log_metadata": {
+      "model": "claude-fable-5-1",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/fable51/run3.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "opus5",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "4de07c45ed4b4bb9a14930e88957d39fa5874c8a7588304cb7be47acd8603531",
+    "log_metadata": {
+      "model": "claude-opus-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/opus5/run1.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "opus5",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "83b51c3bce9eb6661f86889efce1cc3fa10c2a17f474ecf3e806b231296794ab",
+    "log_metadata": {
+      "model": "claude-opus-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/opus5/run2.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "opus5",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "7b6a560c57c3869d7377f0f612ddaea103f9bba9159c70fd4bc4cfd551d61236",
+    "log_metadata": {
+      "model": "claude-opus-5",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/opus5/run3.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "gpt6astra",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "e84597920158a2a5630437c8bb00d3bbaf71a070719228f2dbc672fc9a82042d",
+    "log_metadata": {},
+    "file": "results/assignments/bfcl/gpt6astra/run1.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "gpt6astra",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "ab32a1eae3c2198df68cb6d7b291c612ad5ed73f0f6a87c0cb6a4cf502eb1184",
+    "log_metadata": {},
+    "file": "results/assignments/bfcl/gpt6astra/run2.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "gpt6astra",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "1a7937ed9879b925d63ce70920e510d915a5d809f15306eeb009f446d63a30a6",
+    "log_metadata": {},
+    "file": "results/assignments/bfcl/gpt6astra/run3.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "kimik3",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "9786c1a7e2d99102cc947be26441ca24a788e7622a9e6245916ed92be82a4e9e",
+    "log_metadata": {
+      "model": "kimi-k3",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/kimik3/run1.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "kimik3",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "aa00fd96f3be517a544b056a7aee01916a4a97ab2d9af61a8842e11b9cfae35a",
+    "log_metadata": {
+      "model": "kimi-k3",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/kimik3/run2.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "kimik3",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "521cfede6cb04ca434ebf106a77f63a8e75a56055c06cc2c5ac22a401b4b2091",
+    "log_metadata": {
+      "model": "kimi-k3",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/kimik3/run3.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "deepseekv4pro",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "eabccaf64016b53149c6cfdc6be8ce2b0bb4eea88accd1a0846c5b52b3b9861f",
+    "log_metadata": {
+      "model": "deepseek-v4-pro",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/deepseekv4pro/run1.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "deepseekv4pro",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "660299c2ff32cea0f0cb3e0607a7f5d233e82c8d5f030e384348f86cfb58fe08",
+    "log_metadata": {
+      "model": "deepseek-v4-pro",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/deepseekv4pro/run2.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "deepseekv4pro",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "daf9d135b3856c044a0ee01062c5e05d05ba4b92619f6eab4bd0091fcfe9fd31",
+    "log_metadata": {
+      "model": "deepseek-v4-pro",
+      "claude_code_version": "2.1.270",
+      "permissionMode": "bypassPermissions"
+    },
+    "file": "results/assignments/bfcl/deepseekv4pro/run3.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "gemini35flash",
+    "run": 1,
+    "source_attempt": 1,
+    "source_assignment_sha256": "1c6b22df8a0890f85bf6d14e6c0fdd2b8c099e502ae3dece2c1e527e0ab483d5",
+    "log_metadata": {
+      "model": "gemini-3.5-flash"
+    },
+    "file": "results/assignments/bfcl/gemini35flash/run1.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "gemini35flash",
+    "run": 2,
+    "source_attempt": 2,
+    "source_assignment_sha256": "661dbac4e4ec7c92a1a574cd131a086ba838fb526a2a4b7a14f192a8dcb3d496",
+    "log_metadata": {
+      "model": "gemini-3.5-flash"
+    },
+    "file": "results/assignments/bfcl/gemini35flash/run2.csv"
+  },
+  {
+    "task": "bfcl",
+    "agent": "gemini35flash",
+    "run": 3,
+    "source_attempt": 3,
+    "source_assignment_sha256": "bf4987d4380b4fd2751381ed7831ca7a1ea11b6566cb505755552965c8db73a2",
+    "log_metadata": {
+      "model": "gemini-3.5-flash"
+    },
+    "file": "results/assignments/bfcl/gemini35flash/run3.csv"
+  }
+]
