@@ -1,6 +1,6 @@
 # DataSense-Bench: The First Step Toward an AI Scientist
 
-[📄 Paper](https://datasense-bench.github.io/assets/paper.pdf) · [🌐 Project Page](https://datasense-bench.github.io/)
+[📄 Paper](https://arxiv.org/abs/2610.12190) · [🌐 Project Page](https://datasense-bench.github.io/)
 
 DataSense-Bench evaluates AI agents’ ability to **select valuable training data** and **predict its relative value for post-training** across terminal problem solving and tool use. Each agent selects five data groups and ranks their expected performance. We independently fine-tune Qwen3-4B on each group using a fixed recipe within each task.
 
